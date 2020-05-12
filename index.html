@@ -131,14 +131,17 @@
         // use different error messages for different error codes
         switch (error_code) {
           case '-1': 
-            error_content += "image extension not supported. "; 
+            error_content += "extension not supported. "; 
+            break; 
+          case '0': 
+            error_content += "what are you doing here? (there's no error!) "
             break; 
           case '1': 
           case '2': 
-            error_content += "image size is too big. "; 
+            error_content += "size is too big. "; 
             break; 
           case '3': 
-            error_content += "image upload interrupted, please try again. "; 
+            error_content += "upload interrupted, please try again. "; 
             break; 
           case '4': 
             error_content += "no image is uploaded.  "; 
