@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+            crossorigin="anonymous">
+
+    <title>Home</title>
+  </head>
+  <body>
+    <!-- navigation bar at the top -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <!-- text to be displayed at the left of the navibar -->
+      <a class="navbar-brand" href="/">Menu</a>
+
+      <!-- button for expanding the navibar items when on small devices -->
+      <button class="navbar-toggler" type="button" 
+              data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- all navibar items -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#" onclick="chooseImage();">
+            Upload Picture
+          </a>
+          <a class="nav-item nav-link" href="#">
+            Color Match
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- container for the main body content -->
+    <div class="container px-4">
+      <!-- spacer -->
+      <div style="height: 6rem;"></div>
+
+      <!-- some texts for greeting -->
+      <h1 class="display-4 text-center">
+        Welcome! 
+      </h1>
+      <h4 class="text-muted text-center">
+        to an Algorithm Design class project. 
+      </h4>
+
+      <!-- spacer -->
+      <div style="height: 6rem;"></div>
+
+      <!-- a styled button for image upload -->
+      <div class="text-center">
+        <button class="btn btn-outline-primary btn-lg" 
+                id="image_input_btn" onclick="chooseImage();" 
+                data-toggle="popover" data-trigger="manual" 
+                data-placement="top" 
+                data-content="Failed to upload the image: ">
+          Upload a picture
+        </button>
+      </div>
+
+      <!-- an invisible form for processing image upload -->
+      <form id="upload_form" class="d-none" 
+              action="/upload.php" method="POST" 
+              enctype="multipart/form-data">
+        <!-- (optional) specify the image size limit in bytes-->
+        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+        <!-- image input (uploader) -->
+        <input id="image_input" 
+                type="file" accept=".jpg, .png" name="image_input">
+      </form>
+
+      <!-- maybe put the color matching game here? -->
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+            crossorigin="anonymous"></script>
+
+    <!-- initialize all popovers -->
+    <script>
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    </script>
+
+    <!-- script for handling error code returned from image upload handler -->
+    <script>
+      // parse the "error" url parameter
+      var url_string = window.location.href; 
+      var url = new URL(url_string);
+      var error_code = url.searchParams.get("error");
+
+      // proceed if error code is valid
+      if (error_code != null && error_code != "" && !isNaN(error_code)) {
+        var error_content = $("#image_input_btn").data('content'); 
+
+        // use different error messages for different error codes
+        switch (error_code) {
+          case '1': 
+          case '2': 
+            error_content += "image size is too big. "; 
+            break; 
+          case '3': 
+            error_content += "image upload interrupted, please try again. "; 
+            break; 
+          case '4': 
+            error_content += "no image is uploaded.  "; 
+            break; 
+          default: 
+            error_content += "error code " + error_code; 
+            break; 
+        }
+
+        // set the error message to the popover
+        $("#image_input_btn").attr('data-content', error_content); 
+
+        // modify the default popover template
+        $("#image_input_btn").attr('data-template', 
+                '<div class="popover" role="tooltip">'
+                + '<div class="arrow"></div>'
+                + '<h3 class="popover-header"></h3>'
+                + '<div class="popover-body text-danger"></div>'
+                + '</div>'); 
+        
+        // display the popover containing the error message
+        $("#image_input_btn").popover('show'); 
+      }
+    </script>
+
+    <!-- script for handling image upload button -->
+    <script>
+      // function to be called by the image upload button
+      // to trigger the hidden image input
+      function chooseImage() {
+        $("#image_input").click(); 
+      }
+
+      // auto submit the form (image input) upon an image is uploaded
+      $("#image_input").on('change', function() {
+        $("#upload_form").submit(); 
+      }); 
+    </script>
+  </body>
+</html>
