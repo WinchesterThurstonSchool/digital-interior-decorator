@@ -130,6 +130,9 @@
 
         // use different error messages for different error codes
         switch (error_code) {
+          case '-1': 
+            error_content += "image extension not supported. "; 
+            break; 
           case '1': 
           case '2': 
             error_content += "image size is too big. "; 
@@ -169,8 +172,33 @@
         $("#image_input").click(); 
       }
 
+      // function to ensure the file with the correct extension
+      // is being uploaded
+      function checkExtension(fileName) {
+        var _validExts = [".jpg", ".jpeg", ".png"]; 
+
+        var extValid = false; 
+
+        for (var i = 0; i < _validExts.length; i++) {
+          var ext = _validExts[i];
+          if (fileName.substr(fileName.length - ext.length, 
+                  ext.length).toLowerCase() == ext.toLowerCase()) {
+              extValid = true;
+              break;
+          }
+        }
+
+        if (!extValid) {
+          window.location.href = "index.html?error=-1"; 
+          throw new Error("Bye bye! "); 
+        }
+      }
+
       // auto submit the form (image input) upon an image is uploaded
       $("#image_input").on('change', function() {
+        var fileName = $("#image_input").val(); 
+        checkExtension(fileName); 
+
         $("#upload_form").submit(); 
       }); 
     </script>

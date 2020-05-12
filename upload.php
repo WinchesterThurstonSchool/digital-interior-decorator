@@ -14,6 +14,13 @@ if (($_FILES['image_input']['name'] != "")) {
   $file = $_FILES['image_input']['name'];
   $path = pathinfo($file);
   $ext = $path['extension'];
+
+  // return error when file extension is invalid
+  if ($ext !== "jpg" && $ext !== "jpeg" && $ext !== "png") {
+    header("Location: index.html?error=-1"); 
+    exit; 
+  }
+
   $temp_name = $_FILES['image_input']['tmp_name'];
   
   do {
