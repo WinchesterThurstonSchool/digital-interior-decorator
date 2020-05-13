@@ -10,6 +10,13 @@ function sendCMResult(result) {
   var data = new FormData(); 
   
   colors.forEach(function(b, i) {
+    var actual = hexc(boxes[i].css('background-color')).toLowerCase(); 
+
+    if (actual !== colors[i]) {
+      refreshColorBoxes(); 
+      return; 
+    }
+
     data.append('color-' + (i+1), b); 
   }); 
 
@@ -31,7 +38,7 @@ function refreshColorBoxes() {
 }
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
+  var letters = '0123456789abcdef';
   var color = '#';
 
   for (var i = 0; i < 6; i++) {
@@ -39,4 +46,14 @@ function getRandomColor() {
   }
 
   return color;
+}
+
+function hexc(colorval) {
+  var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  delete(parts[0]);
+  for (var i = 1; i <= 3; ++i) {
+    parts[i] = parseInt(parts[i]).toString(16);
+    if (parts[i].length == 1) parts[i] = '0' + parts[i];
+  }
+  return '#' + parts.join('');
 }
