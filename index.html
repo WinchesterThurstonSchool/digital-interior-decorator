@@ -11,12 +11,7 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
             crossorigin="anonymous">
 
-    <style>
-      .color-box {
-        width: 8rem; 
-        height: 8rem; 
-      }
-    </style>
+    <link rel="stylesheet" href="/assets/stylesheets/homepage.css"> 
 
     <title>Home</title>
   </head>
@@ -49,29 +44,27 @@
 
     <!-- container for the main body content -->
     <div class="container px-4">
-      <!-- spacer -->
-      <div style="height: 6rem;"></div>
+      <div id="greeting-container" class="container">
+        <!-- some texts for greeting -->
+        <h1 class="display-4 text-center">
+          Welcome! 
+        </h1>
+        <h4 class="text-muted text-center">
+          to an Algorithm Design class project. 
+        </h4>
+      </div>
 
-      <!-- some texts for greeting -->
-      <h1 class="display-4 text-center">
-        Welcome! 
-      </h1>
-      <h4 class="text-muted text-center">
-        to an Algorithm Design class project. 
-      </h4>
-
-      <!-- spacer -->
-      <div style="height: 6rem;"></div>
-
-      <!-- a styled button for image upload -->
-      <div class="text-center">
-        <button class="btn btn-outline-primary btn-lg" 
-                id="image_input_btn" onclick="chooseImage();" 
-                data-toggle="popover" data-trigger="manual" 
-                data-placement="top" 
-                data-content="Failed to upload the image: ">
-          Upload a picture
-        </button>
+      <div id="upload-btn-container" class="container">
+        <!-- a styled button for image upload -->
+        <div class="text-center">
+          <button class="btn btn-outline-primary btn-lg" 
+                  id="image_input_btn" onclick="chooseImage();" 
+                  data-toggle="popover" data-trigger="manual" 
+                  data-placement="top" 
+                  data-content="Failed to upload the image: ">
+            Upload a picture
+          </button>
+        </div>
       </div>
 
       <!-- an invisible form for processing image upload -->
@@ -89,7 +82,7 @@
       <div style="height: 24rem;"></div>
 
       <!-- maybe put the color matching game here? -->
-      <div class="w-100 text-center">
+      <div class="text-center">
         <div id="color-box-1" class="color-box d-inline-block"></div>
         <div id="color-box-2" class="color-box d-inline-block"></div>
         <div>
