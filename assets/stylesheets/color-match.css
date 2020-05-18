@@ -1,9 +1,18 @@
-.color-match-container {
-  margin: 12rem 0; 
+.color-match-wrapper {
+  max-width: 24rem; 
+  margin: 6rem auto; 
+  padding: 1.5rem; 
+}
+
+.color-match-boxes-wrapper {
+  margin: 2rem 0; 
 }
 
 .color-match-box {
   width: 8rem; 
   height: 8rem; 
-  margin: 2rem; 
+}
+
+.color-match-button {
+  margin: auto 0.5rem;
 }
