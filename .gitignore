@@ -1,2 +1,5 @@
 # ignore vscode workspace specific settings
 .vscode/*
+
+# ignore testing data
+data/*
