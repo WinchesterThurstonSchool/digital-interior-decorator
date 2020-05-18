@@ -3,3 +3,6 @@
 
 # ignore testing data
 data/*
+
+# ignore uploaded images
+uploaded/*
