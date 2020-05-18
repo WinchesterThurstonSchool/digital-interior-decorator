@@ -1,6 +1,13 @@
 <?php 
 $error_code = $_FILES['image_input']['error']; 
 
+// set error_code to 4 when no upload error value 
+// (nothing is uploaded) 
+// (occurs when user executes this script by using its URL)
+if (!isset($error_code)) {
+  $error_code = 4; 
+}
+
 // check if upload failed
 if ($error_code !== 0) {
   // redirect to home page and pass error code
