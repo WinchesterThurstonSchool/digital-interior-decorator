@@ -3,7 +3,8 @@
   <head>
     <!-- required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" 
+            content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- bootstrap CSS -->
     <link rel="stylesheet" 
@@ -83,16 +84,25 @@
       </form>
 
       <!-- the color-match game -->
-      <div id="color-match" class="container text-center color-match-wrapper">
+      <div id="color-match" 
+              class="container text-center color-match-wrapper">
         <h3 class="text-muted">Do these colors look good together? </h3>
         <div class="color-match-boxes-wrapper">
-          <div id="color-match-box-1" class="color-match-box d-inline-block"></div>
-          <div id="color-match-box-2" class="color-match-box d-inline-block"></div>
+          <div id="color-match-box-1" 
+                  class="color-match-box d-inline-block"></div>
+          <div id="color-match-box-2" 
+                  class="color-match-box d-inline-block"></div>
         </div>
         <div class="color-match-buttons-wrapper">
-          <button class="btn btn-success" onclick="sendCMResult(true);">Yes</button>
-          <button class="btn btn-info" onclick="refreshColorBoxes();">Cannot decide</button>
-          <button class="btn btn-danger" onclick="sendCMResult(false);">No</button>
+          <button class="btn btn-success" onclick="sendCMResult(true);">
+            Yes
+          </button>
+          <button class="btn btn-info" onclick="refreshColorBoxes();">
+            Cannot decide
+          </button>
+          <button class="btn btn-danger" onclick="sendCMResult(false);">
+            No
+          </button>
         </div>
       </div>
     </div>
