@@ -18,21 +18,46 @@ function get() {
 }
 
 function add() {
+  validate($_POST); 
+
   $c1 = $_POST['color-1']; 
   $c2 = $_POST['color-2']; 
   $m = $_POST['match']; 
 
   echo $_GET['color-1']; 
 
-  if (!(isset($c1) && isset($c2) && isset($m))) {
-    invalid(); 
-  }
-
   $m === "true" ? $m = "1" : $m = "0"; 
 
   file_put_contents('data/training-data.csv', "{$c1},{$c2},{$m}\n", FILE_APPEND); 
 
   exit; 
+}
+
+function validate($arr) {
+  if (count($arr) !== 3) {
+    invalid(); 
+  }
+
+  foreach ($arr as $val) {
+    if (!isset($val)) {
+      invalid(); 
+    }
+  
+    if ($val[0] === "#") {
+      validateColor($val); 
+    }
+    else if (!($val === "true" || $val === "false")) {
+      invalid(); 
+    }
+  }
+}
+
+function validateColor($val) {
+  $pattern = "/^#[\da-fA-F]{6}$/"; 
+
+  if (!preg_match($pattern, $val)) {
+    invalid(); 
+  }
 }
 
 function invalid() {
