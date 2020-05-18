@@ -2,3 +2,7 @@
   margin: 8rem 0; 
 }
 
+.color-match-wrapper {
+  border: 0.2rem solid #000000; 
+  border-radius: 1rem; 
+}
