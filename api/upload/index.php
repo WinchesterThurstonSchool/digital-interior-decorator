@@ -1,4 +1,6 @@
 <?php 
+$root = "../.."; 
+
 $error_code = $_FILES['image_input']['error']; 
 
 // set error_code to 4 when no upload error value 
@@ -11,20 +13,20 @@ if (!isset($error_code)) {
 // check if upload failed
 if ($error_code !== 0) {
   // redirect to home page and pass error code
-  header("Location: index.html?error=".$error_code); 
+  header("Location: {$root}/?error=".$error_code); 
   exit(); 
 }
 
 // handle the uploaded image
 if (($_FILES['image_input']['name'] != "")) {
-  $target_dir = "uploaded/";
+  $target_dir = $root."/uploaded/";
   $file = $_FILES['image_input']['name'];
   $path = pathinfo($file);
   $ext = $path['extension'];
 
   // return error when file extension is invalid
   if ($ext !== "jpg" && $ext !== "jpeg" && $ext !== "png") {
-    header("Location: index.html?error=-1"); 
+    header("Location: {$root}/?error=-1"); 
     exit; 
   }
 
@@ -39,12 +41,12 @@ if (($_FILES['image_input']['name'] != "")) {
   move_uploaded_file($temp_name,$path_filename_ext);
   
   // redirect user to the result page
-  header("Location: processing.html?id=".$filename); 
+  header("Location: {$root}/processing.html?id=".$filename); 
   exit(); 
 }
 
 // fallback redirect
-header("Location: index.html"); 
+header("Location: {$root}/"); 
 
 // generate a random string
 function generateRandomString($length = 16) {
