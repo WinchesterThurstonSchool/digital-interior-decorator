@@ -21,85 +21,97 @@
     <title>Home</title>
   </head>
   <body>
-    <!-- navigation bar at the top -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <!-- text to be displayed at the left of the navibar -->
-      <a class="navbar-brand" href="/">Menu</a>
-
-      <!-- button for expanding the navibar items when on small devices -->
-      <button class="navbar-toggler" type="button" 
-              data-toggle="collapse" data-target="#navbarNavAltMarkup" 
-              aria-controls="navbarNavAltMarkup" aria-expanded="false" 
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- all navibar items -->
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="#" onclick="chooseImage();">
-            Upload Picture
-          </a>
-          <a class="nav-item nav-link" href="#">
-            Color Match
-          </a>
+    <div>
+      <!-- a mark of the top for jumping -->
+      <div id="top"></div>
+  
+      <!-- navigation bar at the top -->
+      <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top sticky-top">
+        <!-- text to be displayed at the left of the navibar -->
+        <a class="navbar-brand" href="#top">Menu</a>
+  
+        <!-- button for expanding the navibar items when on small devices -->
+        <button class="navbar-toggler" type="button" 
+                data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <!-- all navibar items -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#top" onclick="chooseImage();">
+              Upload Picture
+            </a>
+            <a class="nav-item nav-link" href="#color-match">
+              Color Match
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
-
-    <!-- container for the main body content -->
-    <div class="container px-4">
-      <div id="greeting-container" class="container">
-        <!-- some texts for greeting -->
-        <h1 class="display-4 text-center">
-          Welcome! 
-        </h1>
-        <h4 class="text-muted text-center">
-          to an Algorithm Design class project. 
-        </h4>
-      </div>
-
-      <div id="upload-btn-container" class="container">
-        <!-- a styled button for image upload -->
-        <div class="text-center">
-          <button class="btn btn-outline-primary btn-lg" 
-                  id="image_input_btn" onclick="chooseImage();" 
-                  data-toggle="popover" data-trigger="manual" 
-                  data-placement="top" 
-                  data-content="Failed to upload the image: ">
-            Upload a picture
-          </button>
+      </nav>
+  
+      <!-- container for the main body content -->
+      <div class="container px-4" style="height: 90vh;">
+        <div id="greeting-container">
+          <!-- some texts for greeting -->
+          <h1 class="display-4 text-center">
+            Welcome! 
+          </h1>
+          <h4 class="text-muted text-center">
+            to an Algorithm Design class project. 
+          </h4>
         </div>
-      </div>
-
-      <!-- an invisible form for processing image upload -->
-      <form id="upload_form" class="d-none" 
-              action="/upload.php" method="POST" 
-              enctype="multipart/form-data">
-        <!-- (optional) specify the image size limit in bytes-->
-        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-        <!-- image input (uploader) -->
-        <input id="image_input" 
-                type="file" accept=".jpg, .png" name="image_input">
-      </form>
-
-      <!-- the color-match game -->
-      <div id="color-match" 
-              class="container text-center color-match-wrapper">
-        <h3 class="text-muted">Do these colors look good together? </h3>
-        <div class="color-match-boxes-wrapper">
-          <div id="color-match-box-1" 
-                  class="color-match-box d-inline-block"></div>
-          <div id="color-match-box-2" 
-                  class="color-match-box d-inline-block"></div>
+  
+        <div id="upload-btn-container">
+          <!-- a styled button for image upload -->
+          <div class="text-center">
+            <button class="btn btn-outline-primary btn-lg" 
+                    id="image_input_btn" onclick="chooseImage();" 
+                    data-toggle="popover" data-trigger="manual" 
+                    data-placement="top" 
+                    data-content="Failed to upload the image: ">
+              Upload a picture
+            </button>
+          </div>
         </div>
-        <div class="color-match-buttons-wrapper">
-          <button class="btn btn-success color-match-button" 
-                  onclick="sendCMResult(true);">Yes</button>
-          <button class="btn btn-info color-match-button" 
-                  onclick="refreshColorBoxes();">Cannot decide</button>
-          <button class="btn btn-danger color-match-button" 
-                  onclick="sendCMResult(false);">No</button>
+  
+        <!-- an invisible form for processing image upload -->
+        <form id="upload_form" class="d-none" 
+                action="/upload.php" method="POST" 
+                enctype="multipart/form-data">
+          <!-- (optional) specify the image size limit in bytes-->
+          <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+          <!-- image input (uploader) -->
+          <input id="image_input" 
+                  type="file" accept=".jpg, .png" name="image_input">
+        </form>
+      </div>
+  
+      <!-- container -->
+      <div id="color-match" class="container px-4">
+        <div class="container text-wrapper">
+          <h2 class="display-5 text-center">Help us imporve our machine learning algorithm! </h2>
+        </div>
+  
+        <!-- the color-match game -->
+        <div id="color-match" 
+                class="container text-center color-match-wrapper">
+          <h3 class="text-muted">Do these colors look good together? </h3>
+          <div class="color-match-boxes-wrapper">
+            <div id="color-match-box-1" 
+                    class="color-match-box d-inline-block"></div>
+            <div id="color-match-box-2" 
+                    class="color-match-box d-inline-block"></div>
+          </div>
+          <div class="color-match-buttons-wrapper">
+            <button class="btn btn-success color-match-button" 
+                    onclick="sendCMResult(true);">Yes</button>
+            <button class="btn btn-info color-match-button" 
+                    onclick="refreshColorBoxes();">Cannot decide</button>
+            <button class="btn btn-danger color-match-button" 
+                    onclick="sendCMResult(false);">No</button>
+          </div>
         </div>
       </div>
     </div>
