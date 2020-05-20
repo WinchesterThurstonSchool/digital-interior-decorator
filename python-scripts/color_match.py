@@ -8,7 +8,7 @@ Original file is located at
 
 # constants
 # root address of the server. default: "/"
-ROOT = "/home/ubuntu/algo_proj/"
+ROOT = "/home/ubuntu/algorithm_design_project/"
 # directory in which the uploaded images are stored. default: ROOT + "uploaded/"
 UPLOAD_DIR = ROOT + "uploaded/"
 
