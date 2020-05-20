@@ -31,7 +31,7 @@ function add() {
   $m === "true" ? $m = "1" : $m = "0"; 
 
   file_put_contents("{$GLOBALS['root']}/data/training-data.csv", 
-          "{$c1},{$c2},{$m}\n", 
+          "{$c1},{$c2},{$m}\r\n", 
           FILE_APPEND); 
 
   exit; 
