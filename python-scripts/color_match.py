@@ -8,7 +8,7 @@ Original file is located at
 
 # constants
 # root address of the server. default: "/"
-ROOT = "http://103.213.247.190:20233/"
+ROOT = "/home/ubuntu/algo_proj/"
 # directory in which the uploaded images are stored. default: ROOT + "uploaded/"
 UPLOAD_DIR = ROOT + "uploaded/"
 
@@ -592,21 +592,3 @@ def process():
 
 # start listening for API call
 app.run()
-
-"""Problems to solve: 
-* Access Control Allow Origin: *
-  * Maybe banned feature on colab notebook
-
-Planning: 
-* Host this somewhere else for testing
-  * Problematic; will have to install all required libraries
-
-API call from browser works perfectly, but when called from JS, return CORS error. 
-
-I will have to look into the problem. 
-
---Jerry 2020.05.19 03:40
-
-(recorded so I don't forget)
-"""
-
