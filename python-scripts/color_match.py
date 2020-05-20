@@ -385,77 +385,75 @@ wd = webdriver.Chrome('chromedriver',options=options)
 #returns a set of products (a product is made up of two links an image source and link to that products page)
 #parameter are the string (in this case its "paintings for sale"), the number of products, webdriver, and an int that tells the webdriver how long to wait inbetween clicks
 def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_between_interactions:int=1):
-    def scroll_to_end(wd):
-        wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(sleep_between_interactions)    
+  def scroll_to_end(wd):
+      wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+      time.sleep(sleep_between_interactions)    
+  
+  # build the google query
+  search_url = "https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&q={q}&oq={q}&gs_l=img"
+
+  # load the page
+  wd.get(search_url.format(q=query))
+
+  image_urls = set()
+  image_count = 0
+  results_start = 0
+  while image_count < max_links_to_fetch:
+    scroll_to_end(wd)
+
+    # get all image thumbnail results
+    thumbnail_results = wd.find_elements_by_css_selector("img.Q4LuWd")
+    number_results = len(thumbnail_results)
     
-    # build the google query
-    search_url = "https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&q={q}&oq={q}&gs_l=img"
-
-    # load the page
-    wd.get(search_url.format(q=query))
-
-    image_urls = set()
-    image_count = 0
-    results_start = 0
-    while image_count < max_links_to_fetch:
-        scroll_to_end(wd)
-
-        # get all image thumbnail results
-        thumbnail_results = wd.find_elements_by_css_selector("img.Q4LuWd")
-        number_results = len(thumbnail_results)
+    print(f"Found: {number_results} search results. Extracting links from {results_start}:{number_results}")
+    
+    for img in thumbnail_results[results_start:number_results]:
+      # try to click every thumbnail such that we can get the real image behind it
+      try:
+        img.click()
+        time.sleep(sleep_between_interactions)
+      except Exception:
+        continue
         
-        print(f"Found: {number_results} search results. Extracting links from {results_start}:{number_results}")
-        
-        for img in thumbnail_results[results_start:number_results]:
-            # try to click every thumbnail such that we can get the real image behind it
-            try:
-                img.click()
-                time.sleep(sleep_between_interactions)
-            except Exception:
-                continue
-            product_link = ""
-            image_link = ""
-            index = -1
-            # extract product page url
-            #this part was a lot of trial and error not quite sure exactly how it works 
-            actual_products = wd.find_elements_by_css_selector('a.Beeb4e')
-            for actual_product in actual_products:
-                if actual_product.get_attribute('href') and 'http' in actual_product.get_attribute('href'):
-                    product_link = actual_product.get_attribute('href')
-                     
-            #extracts the image url 
-            actual_images = wd.find_elements_by_css_selector('img.n3VNCb')
-            i =0
-            for actual_image in actual_images:
-                if actual_image.get_attribute('src') and 'http' in actual_image.get_attribute('src'):
-                    image_link = actual_image.get_attribute('src')
-                    index = i
-                i=i+1
-            
-            #makes sure the image url matches the product url
-            if index!=-1:
-              product_link = actual_products[index].get_attribute('href')
-              image_link = actual_images[index].get_attribute('src')
-              image_urls.add(Product(product_link,image_link))
+      product_link = ""
+      image_link = ""
 
-            image_count = len(image_urls)
+      # extract product page url of the next image
+      actual_products = wd.find_elements_by_css_selector('a.Beeb4e')
+      for actual_product in actual_products:
+        if actual_product.get_attribute('href') and 'http' in actual_product.get_attribute('href'):
+          product_link = actual_product.get_attribute('href')
+                
+      # extracts the next image url 
+      actual_images = wd.find_elements_by_css_selector('img.n3VNCb')
 
-            if len(image_urls) >= max_links_to_fetch:
-                print(f"Found: {len(image_urls)} image links, done!")
-                break
-        else:
-            print("Found:", len(image_urls), "image links, looking for more ...")
-            time.sleep(30)
-            return
-            load_more_button = wd.find_element_by_css_selector(".mye4qd")
-            if load_more_button:
-                wd.execute_script("document.querySelector('.mye4qd').click();")
+      for actual_image in actual_images:
+        if actual_image.get_attribute('src') and 'http' in actual_image.get_attribute('src'):
+          image_link = actual_image.get_attribute('src')
 
-        # move the result startpoint further down
-        results_start = len(thumbnail_results)
+      # save the link and the image 
+      image_urls.add(Product(product_link,image_link))
 
-    return image_urls
+      image_count = len(image_urls)
+
+      if image_count % 50 == 0: 
+        print("Retrieved " + str(image_count) + " images") 
+
+      if len(image_urls) >= max_links_to_fetch:
+        print(f"Found: {len(image_urls)} image links, done!")
+        break
+    else:
+      print("Found:", len(image_urls), "image links, looking for more ...")
+      time.sleep(30)
+      load_more_button = wd.find_element_by_css_selector(".mye4qd")
+      btn_attr = load_more_button.get_attribute('style')
+      if load_more_button and btn_attr and not 'display: none' in btn_attr:
+        wd.execute_script("document.querySelector('.mye4qd').click();")
+
+    # move the result startpoint further down
+    results_start = len(thumbnail_results)
+
+  return image_urls
 
 #the second input is the number of images to fetch
 products = fetch_image_urls('paintings for sale', 10, wd, 1)
@@ -561,11 +559,11 @@ def process():
   image = id + "." + ext
   image_path = UPLOAD_DIR + image
 
-  url = image_path
-  myfile = requests.get(url)
-  open(image, 'wb').write(myfile.content)
+  # url = image_path
+  # myfile = requests.get(url)
+  # open(image, 'wb').write(myfile.content)
 
-  color_thief = ColorThief(image) #used a picture of flower
+  color_thief = ColorThief(image_path) #used a picture of flower
 
   # Get a complete color palette for that image
   palette = color_thief.get_palette(color_count=6)
@@ -585,7 +583,7 @@ def process():
       }
   }
 
-  os.remove(image) 
+  # os.remove(image) 
 
   return jsonify(result)
 
