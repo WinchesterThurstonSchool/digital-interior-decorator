@@ -2,3 +2,7 @@ img {
   width: 24rem; 
   vertical-align: top;
 }
+
+.images-container {
+  margin: 8rem;
+}
