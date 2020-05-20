@@ -35,7 +35,26 @@
             crossorigin="anonymous"></script>
     
     <script>
-      // window.location.href = "result.html"; 
+      var api = "http://13.251.156.181/api/process/"; 
+
+      // parse the "error" url parameter
+      var url_string = window.location.href; 
+      var url = new URL(url_string);
+
+      var id = url.searchParams.get("id"); 
+      var ext = url.searchParams.get("ext"); 
+
+      fetch(api + "?id=" + id + "&ext=" + ext)
+              .then(response => response.json())
+              .then(json => {
+                if (!json.success) {
+                  alert(json.error.message + "(" + json.error.code + ")"); 
+                }
+
+                window.location.href = "/result.html?id=" + id + "&ext=" + ext 
+                        + "&result=" + encodeURIComponent(json.data.image) 
+                        + "&link=" + encodeURIComponent(json.data.link); 
+              });
     </script>
   </body>
 </html>
