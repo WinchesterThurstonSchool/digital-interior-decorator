@@ -11,10 +11,15 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
             crossorigin="anonymous">
 
+    <!-- page-specific CSS -->
+    <link rel="stylesheet" 
+            href="/assets/stylesheets/result.css">
+
     <title>Result</title>
   </head>
   <body>
-    
+    <img id="uploaded-img" src="">
+    <img id="result-img" src="">
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
@@ -26,5 +31,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
             crossorigin="anonymous"></script>
+    
+    <script>
+      var upload_path = "/uploaded/"; 
+
+      var url_string = window.location.href; 
+      var url = new URL(url_string);
+
+      var id = url.searchParams.get("id"); 
+      var ext = url.searchParams.get("ext"); 
+      var result = decodeURIComponent(url.searchParams.get("result")); 
+      var link = decodeURIComponent(url.searchParams.get("link")); 
+
+      $("#uploaded-img").attr('src', upload_path + id + "." + ext); 
+      $("#result-img").attr('src', result); 
+    </script>
   </body>
 </html>
