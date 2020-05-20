@@ -41,7 +41,7 @@ if (($_FILES['image_input']['name'] != "")) {
   move_uploaded_file($temp_name,$path_filename_ext);
   
   // redirect user to the result page
-  header("Location: {$root}/processing.html?id=".$filename); 
+  header("Location: {$root}/processing.html?id=".$filename."&ext=".$ext); 
   exit(); 
 }
 
