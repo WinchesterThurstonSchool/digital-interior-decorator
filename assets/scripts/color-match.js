@@ -22,7 +22,7 @@ function sendCMResult(result) {
 
   data.append('match', result); 
 
-  fetch('/training-data/?action=add', {
+  fetch('/training-data.php?action=add', {
     body: data, 
     method: "post"
   }); 

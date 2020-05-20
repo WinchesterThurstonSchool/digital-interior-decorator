@@ -1,5 +1,5 @@
 <?php 
-$root = "../.."; 
+$root = "../"; 
 
 $action = $_GET['action']; 
 
@@ -15,7 +15,7 @@ switch ($action) {
 }
 
 function get() {
-  header("Location: {$GLOBALS['root']}/data/training-data.csv"); 
+  header("Location: {$GLOBALS['root']}data/training-data.csv"); 
   exit; 
 }
 
@@ -30,7 +30,7 @@ function add() {
 
   $m === "true" ? $m = "1" : $m = "0"; 
 
-  file_put_contents("{$GLOBALS['root']}/data/training-data.csv", 
+  file_put_contents("{$GLOBALS['root']}data/training-data.csv", 
           "{$c1},{$c2},{$m}\r\n", 
           FILE_APPEND); 
 
