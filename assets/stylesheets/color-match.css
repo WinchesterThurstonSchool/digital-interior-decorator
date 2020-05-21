@@ -1,4 +1,6 @@
 .color-match-wrapper {
+  border: 0.2rem solid #000000; 
+  border-radius: 1rem; 
   max-width: 24rem; 
   margin: 6rem auto; 
   padding: 1.5rem; 
