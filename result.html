@@ -41,7 +41,7 @@
         <!-- all navibar items -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#top" onclick="chooseImage();">
+            <a class="nav-item nav-link" href="#" onclick="chooseImage();">
               Upload Picture
             </a>
             <a class="nav-item nav-link" href="#color-match">
@@ -58,10 +58,20 @@
         </div>
         
         <span>
-          <a class="btn btn-primary" href="/">Try another one! </a>
+          <a class="btn btn-primary" href="#" onclick="chooseImage();">Try another one! </a>
           <a id="painting-link" class="btn btn-secondary" href="#">Learn more about this painting</a>
         </span>
       </div>
+      <!-- an invisible form for processing image upload -->
+      <form id="upload_form" class="d-none" 
+              action="/api/upload.php" method="POST" 
+              enctype="multipart/form-data">
+      <!-- (optional) specify the image size limit in bytes-->
+      <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+      <!-- image input (uploader) -->
+      <input id="image_input" 
+              type="file" accept=".jpg, .png" name="image_input">
+      </form>
     </div>
 
     <!-- footer -->
@@ -110,5 +120,8 @@
 
       $("#painting-link").attr('href', link); 
     </script>
+
+    <!-- script for handling image upload button -->
+    <script src="/assets/scripts/upload-form.js"></script>
   </body>
 </html>
