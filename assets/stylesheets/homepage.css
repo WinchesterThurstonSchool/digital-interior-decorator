@@ -1,5 +1,5 @@
 .pg-container {
-  height: 95vh; 
+  min-height: 95vh; 
   margin: 0 2rem;
 }
 
