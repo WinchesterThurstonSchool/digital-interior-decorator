@@ -1,5 +1,58 @@
+.pg-container {
+  height: 95vh; 
+  margin: 0 2rem;
+}
+
+.pg-1-container {
+  padding-top: 8rem; 
+  position: relative; 
+}
+
+.pg-2-container {
+  padding-top: 4rem; 
 }
 
 .greeting-container, .upload-btn-container {
   margin: 0 0 8rem; 
+}
+
+.greeting-container h5 { 
+  display: none; 
+}
+
+@media (min-width: 576px) {
+  .greeting-container h5 {
+    display: block;
+  }
+}
+
+.upload-url-input-container {
+  max-width: 24rem; 
+  margin: 0 auto; 
+}
+
+.scroll-indicator {
+  position: absolute; 
+  bottom: 4rem; 
+  margin: auto; 
+  width: 100%;
+}
+
+.scroll-indicator p {
+  margin: 0 auto; 
+  font-size: 1.2rem;
+}
+
+.scroll-indicator span {
+  background-image: url("/assets/icons/expand_more-black-48dp.svg"); 
+  background-size: contain; 
+  filter: opacity(50%); 
+  display: block; 
+  margin: 0 auto;
+  width: 3rem;
+  height: 3rem; 
+}
+
+.color-match-container {
+  margin: 4rem auto; 
 }
