@@ -1,25 +1,25 @@
 .color-match-wrapper {
-  border: 0.2rem solid #000000; 
-  border-radius: 1rem; 
-  max-width: 24rem; 
-  margin: 6rem auto; 
-  padding: 1.5rem; 
+  border: 3px solid #000000; 
+  border-radius: 16px; 
+  max-width: 384px; 
+  margin: 96px auto; 
+  padding: 24px; 
 }
 
 .color-match-boxes-wrapper {
-  margin: 2rem 0; 
+  margin: 32px 0; 
 }
 
 .color-match-box {
-  width: 8rem; 
-  height: 8rem; 
+  width: 128px; 
+  height: 128px; 
 }
 
 .color-match-button {
-  margin: auto 0.5rem;
+  margin: auto 8px;
   font-size: 1.2rem; 
-  width: 6rem; 
-  height: 3rem; 
+  width: 96px; 
+  height: 48px; 
 }
 
 .color-match-button.btn-info {

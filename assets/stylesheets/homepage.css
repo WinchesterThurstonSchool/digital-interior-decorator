@@ -3,16 +3,16 @@
 }
 
 .pg-1-container {
-  padding-top: 8rem; 
+  padding-top: 128px; 
   position: relative; 
 }
 
 .pg-2-container {
-  padding-top: 4rem; 
+  padding-top: 64px; 
 }
 
 .greeting-container, .upload-btn-container {
-  margin: 0 0 8rem; 
+  margin: 0 0 128px; 
 }
 
 .greeting-container h5 { 
@@ -26,13 +26,13 @@
 }
 
 .upload-url-input-container {
-  max-width: 24rem; 
+  max-width: 384px; 
   margin: 0 auto; 
 }
 
 .scroll-indicator {
   position: absolute; 
-  bottom: 4rem; 
+  bottom: 64px; 
   margin: auto; 
   width: 100%;
 }
@@ -47,11 +47,11 @@
   background-size: contain; 
   filter: opacity(50%); 
   display: block; 
-  margin: 0 auto;
-  width: 3rem;
+  margin: 0 auto; 
+  width: 3rem; 
   height: 3rem; 
 }
 
 .color-match-container {
-  margin: 4rem auto; 
+  margin: 64px auto; 
 }
