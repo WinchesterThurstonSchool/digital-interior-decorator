@@ -1,25 +1,26 @@
 <?php 
 $root = "../"; 
+$data_path = $GLOBALS['root']."data/training-data.csv"; 
 
 $action = $_GET['action']; 
 
 switch ($action) {
   case 'get': 
-    get(); 
+    get($data_path); 
     break; 
   case 'add': 
-    add(); 
+    add($data_path); 
     break; 
   default: 
     invalid(); 
 }
 
-function get() {
-  header("Location: {$GLOBALS['root']}data/training-data.csv"); 
+function get($path) {
+  header("Location: ".$path); 
   exit; 
 }
 
-function add() {
+function add($path) {
   validate($_POST); 
 
   $c1 = $_POST['color-1']; 
@@ -30,7 +31,7 @@ function add() {
 
   $m === "true" ? $m = "1" : $m = "0"; 
 
-  file_put_contents("{$GLOBALS['root']}data/training-data.csv", 
+  file_put_contents($path, 
           "{$c1},{$c2},{$m}\r\n", 
           FILE_APPEND); 
 
