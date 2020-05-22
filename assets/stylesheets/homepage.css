@@ -43,8 +43,9 @@
 }
 
 .scroll-indicator span {
-  background-image: url("/assets/icons/expand_more-black-48dp.svg"); 
+  background-image: url("/assets/icons/chevron-down.svg"); 
   background-size: contain; 
+  background-repeat: no-repeat; 
   filter: opacity(50%); 
   display: block; 
   margin: 0 auto; 
