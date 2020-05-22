@@ -21,40 +21,40 @@
     <title>Result | Digital Interior Decorator</title>
   </head>
   <body>
-    <div>
-      <!-- a mark of the top for jumping -->
-      <div id="top"></div>
-    
-      <!-- navigation bar at the top -->
-      <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top sticky-top">
-        <!-- text to be displayed at the left of the navibar -->
-        <a class="navbar-brand" href="/">Home</a>
+    <!-- a mark of the top for jumping -->
+    <div id="top"></div>
   
-        <!-- button for expanding the navibar items when on small devices -->
-        <button class="navbar-toggler" type="button" 
-                data-toggle="collapse" data-target="#navbarNavAltMarkup" 
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" 
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <!-- all navibar items -->
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#" onclick="chooseImage();">
-              Upload Picture
-            </a>
-            <a class="nav-item nav-link" href="/index.html#color-match">
-              Color Match
-            </a>
-            <a class="nav-item nav-link" href="/about.html">
-              About
-            </a>
-          </div>
+    <!-- navigation bar at the top -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top sticky-top">
+      <!-- text to be displayed at the left of the navibar -->
+      <a class="navbar-brand" href="/">Home</a>
+
+      <!-- button for expanding the navibar items when on small devices -->
+      <button class="navbar-toggler" type="button" 
+              data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- all navibar items -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#" onclick="chooseImage();">
+            Upload Picture
+          </a>
+          <a class="nav-item nav-link" href="/index.html#color-match">
+            Color Match
+          </a>
+          <a class="nav-item nav-link" href="/about.html">
+            About
+          </a>
         </div>
-      </nav>
-      
-      <div class="container px-4 text-center">
+      </div>
+    </nav>
+    
+    <div class="main-container">
+      <div class="text-center">
         <div class="images-container"> 
           <img id="uploaded-img" src="">
           <img id="result-img" src="">
@@ -65,6 +65,7 @@
           <a id="painting-link" class="btn btn-secondary" href="#">Learn more about this painting</a>
         </span>
       </div>
+
       <!-- an invisible form for processing image upload -->
       <form id="upload-form" class="d-none" 
               action="" method="POST" 
