@@ -1,6 +1,6 @@
 <?php 
 $root = "../"; 
-$data_path = $GLOBALS['root']."data/training-data.csv"; 
+$data_path = $root."data/training-data.csv"; 
 $init_content = "Color1,Color2,Match\r\n"; 
 
 $action = $_GET["action"]; 
