@@ -1,7 +1,7 @@
 <?php 
 $root = "../"; 
 
-$error_code = $_FILES['image_input']['error']; 
+$error_code = $_FILES["image_input"]["error"]; 
 
 // set error_code to 4 when no upload error value 
 // (nothing is uploaded) 
@@ -18,11 +18,11 @@ if ($error_code !== 0) {
 }
 
 // handle the uploaded image
-if (($_FILES['image_input']['name'] != "")) {
+if (($_FILES["image_input"]["name"] != "")) {
   $target_dir = $root."uploaded/";
-  $file = $_FILES['image_input']['name'];
+  $file = $_FILES["image_input"]["name"];
   $path = pathinfo($file);
-  $ext = $path['extension'];
+  $ext = $path["extension"];
 
   // return error when file extension is invalid
   if ($ext !== "jpg" && $ext !== "jpeg" && $ext !== "png") {
@@ -30,7 +30,7 @@ if (($_FILES['image_input']['name'] != "")) {
     exit; 
   }
 
-  $temp_name = $_FILES['image_input']['tmp_name'];
+  $temp_name = $_FILES["image_input"]["tmp_name"];
   
   do {
     $filename = generateRandomString();
@@ -51,11 +51,11 @@ header("Location: {$root}");
 // generate a random string
 function generateRandomString($length = 16) {
   $characters = 
-          '0123456789'
-          .'abcdefghijklmnopqrstuvwxyz'
-          .'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          "0123456789"
+          ."abcdefghijklmnopqrstuvwxyz"
+          ."ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   $charactersLength = strlen($characters);
-  $randomString = '';
+  $randomString = "";
   for ($i = 0; $i < $length; $i++) {
       $randomString .= $characters[rand(0, $charactersLength - 1)];
   }

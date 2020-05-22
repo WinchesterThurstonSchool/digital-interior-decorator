@@ -3,17 +3,17 @@ $root = "../";
 $data_path = $GLOBALS['root']."data/training-data.csv"; 
 $init_content = "Color1,Color2,Match\r\n"; 
 
-$action = $_GET['action']; 
+$action = $_GET["action"]; 
 
 if (!file_exists($data_path)) {
   file_put_contents($data_path, $init_content); 
 }
 
 switch ($action) {
-  case 'get': 
+  case "get": 
     get($data_path); 
     break; 
-  case 'add': 
+  case "add": 
     add($data_path); 
     break; 
   default: 
@@ -28,11 +28,11 @@ function get($path) {
 function add($path) {
   validate($_POST); 
 
-  $c1 = $_POST['color-1']; 
-  $c2 = $_POST['color-2']; 
-  $m = $_POST['match']; 
+  $c1 = $_POST["color-1"]; 
+  $c2 = $_POST["color-2"]; 
+  $m = $_POST["match"]; 
 
-  echo $_GET['color-1']; 
+  echo $_GET["color-1"]; 
 
   $m === "true" ? $m = "1" : $m = "0"; 
 

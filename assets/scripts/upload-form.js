@@ -1,7 +1,7 @@
 // function to be called by the image upload button
 // to trigger the hidden image input
 function chooseImage() {
-  $("#image_input").click(); 
+  $("#image-input").click(); 
 }
 
 // function to ensure the file with the correct extension
