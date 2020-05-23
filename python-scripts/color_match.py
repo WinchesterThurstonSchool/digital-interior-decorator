@@ -427,9 +427,18 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
       # extracts the next image url 
       actual_images = wd.find_elements_by_css_selector('img.n3VNCb')
 
+      i = 0
       for actual_image in actual_images:
         if actual_image.get_attribute('src') and 'http' in actual_image.get_attribute('src'):
           image_link = actual_image.get_attribute('src')
+          index = i
+        i = i+1
+      
+      #makes sure the image url matches the product url
+      if index != -1:
+        product_link = actual_products[index].get_attribute('href')
+        image_link = actual_images[index].get_attribute('src')
+        image_urls.add(Product(product_link, image_link))
 
       # save the link and the image 
       image_urls.add(Product(product_link,image_link))
