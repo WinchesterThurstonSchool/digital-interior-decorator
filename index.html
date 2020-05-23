@@ -85,12 +85,16 @@
 
             <div class="upload-url-input-container input-group">
               <input type="text" class="form-control" 
+                      id="input-url" 
                       placeholder="Enter an URL" 
                       aria-label="Enter an URL" 
-                      aria-describedby="button-addon2">
+                      aria-describedby="button-addon2"
+                      form="upload-form"
+                      name="input-url" required>
               <div class="input-group-append">
                 <button class="btn btn-outline-primary" 
-                        type="button" id="button-addon2">
+                        type="submit" id="button-addon2"
+                        form="upload-form">
                   Go
                 </button>
               </div>
