@@ -56,6 +56,22 @@
       <div class="main-container">
         
       </div>
+      
+      <p class="text-center">
+        All content on this website is copyrighted 
+        unless otherwise specified. 
+      </p>
+
+      <!-- an invisible form for processing image upload -->
+      <form id="upload-form" class="d-none" 
+              action="" method="POST" 
+              enctype="multipart/form-data">
+      <!-- (optional) specify the image size limit in bytes-->
+      <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+      <!-- image input (uploader) -->
+      <input id="image-input" 
+              type="file" accept=".jpg, .png" name="image-input">
+      </form>
     </div>
 
     <!-- footer -->
@@ -87,5 +103,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
             crossorigin="anonymous"></script>
+
+    <!-- script for handling image upload button -->
+    <script src="/assets/scripts/upload-form.js"></script>
   </body>
 </html>
