@@ -25,11 +25,6 @@
   }
 }
 
-.upload-url-input-container {
-  max-width: 384px; 
-  margin: 0 auto; 
-}
-
 .scroll-indicator {
   position: absolute; 
   bottom: 64px; 
