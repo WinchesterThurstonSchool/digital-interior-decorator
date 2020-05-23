@@ -46,4 +46,7 @@ form.on("submit", function() {
   if (img.val()) {
     return true; 
   }
+  
+  var pattern = /^(?:(http(?:s?)):\/\/)?((?:\w+\.)+\w+)\/(?:.+\/)*.+\.(jpe?g|png)$/gi; 
+  var result = pattern.exec(url.val()); 
 }); 
