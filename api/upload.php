@@ -1,7 +1,7 @@
 <?php 
 $root = "../"; 
 
-$error_code = $_FILES["image_input"]["error"]; 
+$error_code = $_FILES["image-input"]["error"]; 
 
 // set error_code to 4 when no upload error value 
 // (nothing is uploaded) 
@@ -18,9 +18,9 @@ if ($error_code !== 0) {
 }
 
 // handle the uploaded image
-if (($_FILES["image_input"]["name"] != "")) {
+if (($_FILES["image-input"]["name"] != "")) {
   $target_dir = $root."uploaded/";
-  $file = $_FILES["image_input"]["name"];
+  $file = $_FILES["image-input"]["name"];
   $path = pathinfo($file);
   $ext = $path["extension"];
 
@@ -30,7 +30,7 @@ if (($_FILES["image_input"]["name"] != "")) {
     exit; 
   }
 
-  $temp_name = $_FILES["image_input"]["tmp_name"];
+  $temp_name = $_FILES["image-input"]["tmp_name"];
   
   do {
     $filename = generateRandomString();
