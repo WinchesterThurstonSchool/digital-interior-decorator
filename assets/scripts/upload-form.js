@@ -30,6 +30,8 @@ var api = "/api/upload.php";
 
 var form = $("#upload-form"); 
 var img = $("#image-input"); 
+var url = $("#url-input"); 
+
 form.attr("action", api); 
 
 // auto submit the form (image input) upon an image is uploaded
