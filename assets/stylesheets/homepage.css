@@ -26,10 +26,17 @@
 }
 
 .scroll-indicator {
+  display: none; 
   position: absolute; 
   bottom: 64px; 
   margin: auto; 
   width: 100%;
+}
+
+@media (min-height: 720px) {
+  .scroll-indicator {
+    display: block; 
+  }
 }
 
 .scroll-indicator p {
