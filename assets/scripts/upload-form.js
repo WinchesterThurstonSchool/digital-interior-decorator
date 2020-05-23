@@ -28,12 +28,14 @@ function checkExtension(fileName) {
 
 var api = "/api/upload.php"; 
 
-$("#upload-form").attr("action", api); 
+var form = $("#upload-form"); 
+var img = $("#image-input"); 
+form.attr("action", api); 
 
 // auto submit the form (image input) upon an image is uploaded
-$("#image-input").on("change", function() {
-  var fileName = $("#image-input").val(); 
+img.on("change", function() {
+  var fileName = img.val(); 
   checkExtension(fileName); 
 
-  $("#upload-form").submit(); 
+  form.submit(); 
 }); 
