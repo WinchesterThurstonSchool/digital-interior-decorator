@@ -1,8 +1,53 @@
-#greeting-container, #upload-btn-container {
-  margin: 8rem 0; 
+.pg-container {
+  min-height: 95vh; 
 }
 
-.color-match-wrapper {
-  border: 0.2rem solid #000000; 
-  border-radius: 1rem; 
+.pg-1-container {
+  padding-top: 128px; 
+  position: relative; 
+}
+
+.pg-2-container {
+  padding-top: 64px; 
+}
+
+.greeting-container, .upload-btn-container {
+  margin: 0 0 128px; 
+}
+
+.greeting-container h5 { 
+  display: none; 
+}
+
+@media (min-width: 576px) {
+  .greeting-container h5 {
+    display: block;
+  }
+}
+
+.scroll-indicator {
+  position: absolute; 
+  bottom: 64px; 
+  margin: auto; 
+  width: 100%;
+}
+
+.scroll-indicator p {
+  margin: 0 auto; 
+  font-size: 1.2rem;
+}
+
+.scroll-indicator span {
+  background-image: url("/assets/icons/chevron-down.svg"); 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  filter: opacity(50%); 
+  display: block; 
+  margin: 0 auto; 
+  width: 3rem; 
+  height: 3rem; 
+}
+
+.color-match-container {
+  margin: 64px auto; 
 }

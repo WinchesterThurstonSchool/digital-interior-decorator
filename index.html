@@ -12,58 +12,65 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
             crossorigin="anonymous">
 
+    <!-- global CSS -->
+    <link rel="stylesheet" href="/assets/stylesheets/global.css">
+
     <!-- color-match CSS -->
     <link rel="stylesheet" href="/assets/stylesheets/color-match.css"> 
 
     <!-- page-specific CSS -->
     <link rel="stylesheet" href="/assets/stylesheets/homepage.css"> 
 
-    <title>Home</title>
+    <title>Home | Digital Interior Decorator</title>
   </head>
   <body>
-    <div>
-      <!-- a mark of the top for jumping -->
-      <div id="top"></div>
-  
-      <!-- navigation bar at the top -->
-      <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top sticky-top">
-        <!-- text to be displayed at the left of the navibar -->
-        <a class="navbar-brand" href="#top">Menu</a>
-  
-        <!-- button for expanding the navibar items when on small devices -->
-        <button class="navbar-toggler" type="button" 
-                data-toggle="collapse" data-target="#navbarNavAltMarkup" 
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" 
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <!-- all navibar items -->
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#top" onclick="chooseImage();">
-              Upload Picture
-            </a>
-            <a class="nav-item nav-link" href="#color-match">
-              Color Match
-            </a>
-          </div>
+    <!-- a mark of the top for jumping -->
+    <div id="top"></div>
+
+    <!-- navigation bar at the top -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light 
+            fixed-top sticky-top">
+      <!-- text to be displayed at the left of the navibar -->
+      <a class="navbar-brand" href="#top">Home</a>
+
+      <!-- button for expanding the navibar items when on small devices -->
+      <button class="navbar-toggler" type="button" 
+              data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- all navibar items -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#" onclick="chooseImage();">
+            Upload Picture
+          </a>
+          <a class="nav-item nav-link" href="#color-match">
+            Color Match
+          </a>
+          <a class="nav-item nav-link" href="/about.html">
+            About
+          </a>
         </div>
-      </nav>
-  
+      </div>
+    </nav>
+
+    <div class="main-container container">
       <!-- container for the main body content -->
-      <div class="container px-4" style="height: 90vh;">
-        <div id="greeting-container">
+      <div class="pg-container pg-1-container">
+        <div id="greeting-container" class="greeting-container">
           <!-- some texts for greeting -->
-          <h1 class="display-4 text-center">
-            Welcome! 
+          <h1 class="display-5 text-center">
+            Digital Interior Decorator
           </h1>
-          <h4 class="text-muted text-center">
-            to an Algorithm Design class project. 
-          </h4>
+          <h5 class="text-muted text-center">
+            an Algorithm Design class project 
+          </h5>
         </div>
   
-        <div id="upload-btn-container">
+        <div id="upload-btn-container" class="upload-btn-container">
           <!-- a styled button for image upload -->
           <div class="text-center">
             <button class="btn btn-outline-primary btn-lg" 
@@ -77,44 +84,72 @@
         </div>
   
         <!-- an invisible form for processing image upload -->
-        <form id="upload_form" class="d-none" 
-                action="/upload.php" method="POST" 
+        <form id="upload-form" class="d-none" 
+                action="" method="POST" 
                 enctype="multipart/form-data">
           <!-- (optional) specify the image size limit in bytes-->
-          <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+          <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
           <!-- image input (uploader) -->
-          <input id="image_input" 
-                  type="file" accept=".jpg, .png" name="image_input">
+          <input id="image-input" 
+                  type="file" accept=".jpg, .png" name="image-input">
         </form>
-      </div>
-  
-      <!-- container -->
-      <div id="color-match" class="container px-4">
-        <div class="container text-wrapper">
-          <h2 class="display-5 text-center">Help us imporve our machine learning algorithm! </h2>
+
+        <div class="scroll-indicator text-muted d-none d-md-block">
+          <p class="text-center">Scroll down</p>
+          <span></span>
         </div>
-  
-        <!-- the color-match game -->
-        <div id="color-match" 
-                class="container text-center color-match-wrapper">
-          <h3 class="text-muted">Do these colors look good together? </h3>
-          <div class="color-match-boxes-wrapper">
-            <div id="color-match-box-1" 
-                    class="color-match-box d-inline-block"></div>
-            <div id="color-match-box-2" 
-                    class="color-match-box d-inline-block"></div>
+      </div>
+      
+      <div class="pg-container pg-2-container">
+        <!-- container -->
+        <div id="color-match" class="color-match-container">
+          <div class="text-wrapper">
+            <h2 class="display-5 text-center">
+              Help us improve our machine learning algorithm! 
+            </h2>
           </div>
-          <div class="color-match-buttons-wrapper">
-            <button class="btn btn-success color-match-button" 
-                    onclick="sendCMResult(true);">Yes</button>
-            <button class="btn btn-info color-match-button" 
-                    onclick="refreshColorBoxes();">Cannot decide</button>
-            <button class="btn btn-danger color-match-button" 
-                    onclick="sendCMResult(false);">No</button>
+    
+          <!-- the color-match game -->
+          <div id="color-match-module" 
+                  class="text-center color-match-wrapper">
+            <h3 class="text-muted">Do these colors look good together? </h3>
+            <div class="color-match-boxes-wrapper">
+              <div id="color-match-box-1" 
+                      class="color-match-box d-inline-block"></div>
+              <div id="color-match-box-2" 
+                      class="color-match-box d-inline-block"></div>
+            </div>
+            <div class="color-match-buttons-wrapper">
+              <button class="btn btn-success color-match-button" 
+                      onclick="sendCMResult(true);">Yes</button>
+              <button class="btn btn-info color-match-button" 
+                      onclick="refreshColorBoxes();">Cannot decide</button>
+              <button class="btn btn-danger color-match-button" 
+                      onclick="sendCMResult(false);">No</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- footer -->
+    <footer class="text-center text-white">
+      <hr>
+      <p>
+        <a href="/about.html">About</a> 
+        | <a href="https://github.com/JerryZWT/digital-interior-decorator">Github Repository</a>
+      </p>
+      <br>
+      <p>Copyright © 2020 
+        <span>J. Allebach, </span>
+        <span>A. Eppinger, </span>
+        <span>J. Molder, </span>
+        <span>S. Routledge, </span>
+        <span>D. Schlingemann </span>
+        and 
+        <span>S. Zhang. </span></p>
+      <p>All rights reserved. </p>
+    </footer>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
@@ -188,42 +223,6 @@
     </script>
 
     <!-- script for handling image upload button -->
-    <script>
-      // function to be called by the image upload button
-      // to trigger the hidden image input
-      function chooseImage() {
-        $("#image_input").click(); 
-      }
-
-      // function to ensure the file with the correct extension
-      // is being uploaded
-      function checkExtension(fileName) {
-        var _validExts = [".jpg", ".jpeg", ".png"]; 
-
-        var extValid = false; 
-
-        for (var i = 0; i < _validExts.length; i++) {
-          var ext = _validExts[i];
-          if (fileName.substr(fileName.length - ext.length, 
-                  ext.length).toLowerCase() == ext.toLowerCase()) {
-              extValid = true;
-              break;
-          }
-        }
-
-        if (!extValid) {
-          window.location.href = "index.html?error=-1"; 
-          throw new Error("Bye bye! "); 
-        }
-      }
-
-      // auto submit the form (image input) upon an image is uploaded
-      $("#image_input").on('change', function() {
-        var fileName = $("#image_input").val(); 
-        checkExtension(fileName); 
-
-        $("#upload_form").submit(); 
-      }); 
-    </script>
+    <script src="/assets/scripts/upload-form.js"></script>
   </body>
 </html>

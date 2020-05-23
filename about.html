@@ -15,10 +15,9 @@
     <link rel="stylesheet" href="/assets/stylesheets/global.css">
 
     <!-- page-specific CSS -->
-    <link rel="stylesheet" 
-            href="/assets/stylesheets/result.css">
+    <link rel="stylesheet" href="/assets/stylesheets/about.css">
 
-    <title>Result | Digital Interior Decorator</title>
+    <title>About | Digital Interior Decorator</title>
   </head>
   <body>
     <!-- a mark of the top for jumping -->
@@ -46,26 +45,106 @@
           <a class="nav-item nav-link" href="/index.html#color-match">
             Color Match
           </a>
-          <a class="nav-item nav-link" href="/about.html">
+          <a class="nav-item nav-link" href="#top">
             About
           </a>
         </div>
       </div>
     </nav>
     
-    <div class="main-container">
-      <div class="text-center">
-        <div class="images-container"> 
-          <img id="uploaded-img" src="">
-          <img id="result-img" src="">
-          <p class="text-muted">Image may be subject to copyright. </p>
-        </div>
-        
-        <span>
-          <a class="btn btn-primary" href="#" onclick="chooseImage();">Try another one! </a>
-          <a id="painting-link" class="btn btn-secondary" href="#">Learn more about this painting</a>
-        </span>
+    <div class="main-container container">
+      <div class="introduction">
+        <h1 class="text-center">
+          <span>Algorithm Design: </span>
+          <span>Digital Interior Decorator</span>
+          <br>
+          <a href="https://github.com/JerryZWT/digital-interior-decorator">
+            <img src="/assets/icons/github-badge.svg">
+          </a>
+        </h1>
+        <p>
+          Our year-end software development project allows users 
+          to find the optimal piece of artwork to adorn a physical space 
+          in their home. Users upload a picture of the room, the colors 
+          of the room are interpreted, a machine learning algorithm determines 
+          a palette of complimentary colors, and the web is scraped for 
+          artwork that matches this palette. 
+        </p>
+        <p>
+          No longer will you have to worry 
+          about the difficulty of searching the web for hours for the ideal 
+          piece of artwork—
+        </p>
+        <p class="indented">
+          allow algorithms to do the decorating for you. 
+        </p>
+        <p>
+          Enjoy! 
+        </p>
       </div>
+      <div class="credits">
+        <h4>Creators: </h4>
+        <h5>Algorithm Design Class 2019–2020</h5>
+        <p>
+          <span>J. Allebach, </span>
+          <span>A. Eppinger, </span>
+          <span>J. Molder, </span>
+          <span>S. Routledge, </span>
+          <span>D. Schlingemann </span>
+          and 
+          <span>S. Zhang. </span>
+        </p>
+        <h5>Instructor: </h5>
+        <p>
+          <span>Mr. David Nassar</span>
+        </p>
+      </div>
+      <div class="licenses">
+        <h4>Open Source Licenses: </h4>
+        <div>
+          <h5>
+            Bootstrap
+          </h5>
+          <a href="https://github.com/twbs/bootstrap/tree/v4.3.1">
+            <img src="/assets/icons/github-badge.svg">
+          </a>
+          <p>
+            Copyright © 2011-2019 Twitter, Inc. 
+            <br>
+            Copyright © 2011-2019 The Bootstrap Authors
+          </p>
+          <p>
+            The web user interface is mainly designed using Bootstrap v4.3,  
+            which is licensed under the 
+            <a href="/assets/licenses/bootstrap-v4.3.1-license">
+              MIT License. 
+            </a>
+          </p>
+        </div>
+        <div>
+          <h5>
+            Bootstrap Icons
+          </h5>
+          <a href="https://github.com/twbs/icons/tree/v1.0.0-alpha4">
+            <img src="/assets/icons/github-badge.svg">
+          </a>
+          <p>
+            Copyright © 2019 The Bootstrap Authors 
+          </p>
+          <p>
+            Any icons used are either embeded in Bootstrap v4.3 or 
+            from Bootstrap Icons v1.0.0-alpha4, which is licensed under the 
+            <a href="/assets/licenses/bootstrap-icons-v1.0.0-alpha4-license">
+              MIT License. 
+            </a>
+          </p>
+        </div>
+      </div>
+      
+      <p class="text-center">
+        All content on this website is copyrighted 
+        unless otherwise specified. 
+      </p>
 
       <!-- an invisible form for processing image upload -->
       <form id="upload-form" class="d-none" 
@@ -108,23 +187,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
             crossorigin="anonymous"></script>
-    
-    <script>
-      var upload_path = "/uploaded/"; 
-
-      var url_string = window.location.href; 
-      var url = new URL(url_string);
-
-      var id = url.searchParams.get("id"); 
-      var ext = url.searchParams.get("ext"); 
-      var result = decodeURIComponent(url.searchParams.get("result")); 
-      var link = decodeURIComponent(url.searchParams.get("link")); 
-
-      $("#uploaded-img").attr('src', upload_path + id + "." + ext); 
-      $("#result-img").attr('src', result); 
-
-      $("#painting-link").attr('href', link); 
-    </script>
 
     <!-- script for handling image upload button -->
     <script src="/assets/scripts/upload-form.js"></script>

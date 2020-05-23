@@ -1,5 +1,7 @@
 <?php 
-$error_code = $_FILES['image_input']['error']; 
+$root = "../"; 
+
+$error_code = $_FILES["image-input"]["error"]; 
 
 // set error_code to 4 when no upload error value 
 // (nothing is uploaded) 
@@ -11,24 +13,24 @@ if (!isset($error_code)) {
 // check if upload failed
 if ($error_code !== 0) {
   // redirect to home page and pass error code
-  header("Location: index.html?error=".$error_code); 
+  header("Location: {$root}?error=".$error_code); 
   exit(); 
 }
 
 // handle the uploaded image
-if (($_FILES['image_input']['name'] != "")) {
-  $target_dir = "uploaded/";
-  $file = $_FILES['image_input']['name'];
+if (($_FILES["image-input"]["name"] != "")) {
+  $target_dir = $root."uploaded/";
+  $file = $_FILES["image-input"]["name"];
   $path = pathinfo($file);
-  $ext = $path['extension'];
+  $ext = $path["extension"];
 
   // return error when file extension is invalid
   if ($ext !== "jpg" && $ext !== "jpeg" && $ext !== "png") {
-    header("Location: index.html?error=-1"); 
+    header("Location: {$root}?error=-1"); 
     exit; 
   }
 
-  $temp_name = $_FILES['image_input']['tmp_name'];
+  $temp_name = $_FILES["image-input"]["tmp_name"];
   
   do {
     $filename = generateRandomString();
@@ -39,21 +41,21 @@ if (($_FILES['image_input']['name'] != "")) {
   move_uploaded_file($temp_name,$path_filename_ext);
   
   // redirect user to the result page
-  header("Location: processing.html?id=".$filename); 
+  header("Location: {$root}processing.html?id=".$filename."&ext=".$ext); 
   exit(); 
 }
 
 // fallback redirect
-header("Location: index.html"); 
+header("Location: {$root}"); 
 
 // generate a random string
 function generateRandomString($length = 16) {
   $characters = 
-          '0123456789'
-          .'abcdefghijklmnopqrstuvwxyz'
-          .'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          "0123456789"
+          ."abcdefghijklmnopqrstuvwxyz"
+          ."ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   $charactersLength = strlen($characters);
-  $randomString = '';
+  $randomString = "";
   for ($i = 0; $i < $length; $i++) {
       $randomString .= $characters[rand(0, $charactersLength - 1)];
   }
