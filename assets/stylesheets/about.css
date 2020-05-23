@@ -1,0 +1,41 @@
+.main-container {
+  margin: 128px auto; 
+}
+
+span {
+  display: inline-block;
+}
+
+.introduction {
+  margin: 32px auto; 
+}
+
+.introduction h1 {
+  margin: auto auto 64px; 
+}
+
+.introduction .indented {
+  text-indent: 40px;
+}
+
+.introduction p {
+  font-size: 1.4rem; 
+}
+
+@media (max-width: 575.98px) {
+  .introduction p {
+    font-size: 1.2rem; 
+  }
+}
+
+.credits, .licenses {
+  margin: 64px auto; 
+}
+
+.licenses div {
+  margin: 16px auto;
+}
+
+.licenses p, .credits p {
+  margin-bottom: 8px; 
+}
