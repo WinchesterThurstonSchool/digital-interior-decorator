@@ -41,3 +41,9 @@ img.on("change", function() {
 
   form.submit(); 
 }); 
+
+form.on("submit", function() {
+  if (img.val()) {
+    return true; 
+  }
+}); 
