@@ -34,6 +34,10 @@ var url = $("#url-input");
 
 form.attr("action", api); 
 
+url.on("keyup", function() {
+  
+}); 
+
 // auto submit the form (image input) upon an image is uploaded
 img.on("change", function() {
   var fileName = img.val(); 
