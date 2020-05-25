@@ -17,6 +17,8 @@ CHROME = ""
 CHROMEDRIVER = "chromedriver"
 # number of images to fetch from Google search result
 NUM_OF_IMAGES = 127
+# regular expression for validating image url
+IMAGE_URL_PATTERN = r'^(?:(http(?:s?)):\/\/)?((?:\w+\.)+\w+)\/(?:.+\/)*.+\.(jpe?g|png)\??.*$'
 
 """# Aria and Didi's Code:"""
 
@@ -366,6 +368,7 @@ if CHROME:
   options.binary_location = CHROME
 
 import io
+import re
 from urllib.request import urlopen
 
 class Product:
@@ -448,8 +451,10 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
       if index != -1:
         product_link = actual_products[index].get_attribute('href')
         image_link = actual_images[index].get_attribute('src')
-        image_urls.add(Product(product_link, image_link))
 
+        # add image to array only when its url matches the standard pattern defined
+        if re.match(IMAGE_URL_PATTERN, image_link, re.I): 
+          image_urls.add(Product(product_link, image_link))
 
       image_count = len(image_urls)
 
