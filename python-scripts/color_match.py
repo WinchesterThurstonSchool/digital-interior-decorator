@@ -6,6 +6,18 @@ Original file is located at
     https://colab.research.google.com/drive/1l7NW5a53H125dE0zvyrMa0Q3PfOdqfXg
 """
 
+# Commented out IPython magic to ensure Python compatibility.
+#Have to install the colorthief package manually
+# %pip install colorthief
+
+# install chromium, its driver, and selenium
+# !apt-get update
+# !apt install chromium-chromedriver
+# %pip install selenium
+# %pip install colorthief
+
+# %pip install -U flask-cors
+
 # constants
 # root address of the server. 
 ROOT = "/"
@@ -284,13 +296,6 @@ def get_feature_values_array(color1, color2):
 
 """## Image Upload"""
 
-# Commented out IPython magic to ensure Python compatibility.
-#Have to install the colorthief package manually
-# %pip install colorthief
-
-#Can get a single dominant color
-from colorthief import ColorThief
-
 """## Combining Image with ML"""
 
 #random color generator from https://stackoverflow.com/questions/28999287/generate-random-colors-rgb
@@ -349,11 +354,6 @@ def colors_to_hex(colors):
 
 """# Scott and Jacob's Code:"""
 
-# install chromium, its driver, and selenium
-# !apt-get update
-# !apt install chromium-chromedriver
-# !pip install selenium
-# !pip install colorthief
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
@@ -529,16 +529,6 @@ def color_distance(rgb1, rgb2):
 """# Jerry and Joe's Code: 
 *Modified from above*
 """
-
-# !pip install -U flask-cors
-
-# import requests
-import flask
-import os
-import logging
-from flask import request, jsonify
-from flask_cors import CORS
-# from google.colab.output import eval_js
 
 # message to be displayed when request is invalid
 INVALID_DATA = {
