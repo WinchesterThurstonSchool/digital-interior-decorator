@@ -15,6 +15,8 @@ UPLOAD_DIR = ROOT + "uploaded/"
 CHROME = ""
 # chromedriver binary (default: "chromedriver")
 CHROMEDRIVER = "chromedriver"
+# number of images to fetch from Google search result
+NUM_OF_IMAGES = 127
 
 """# Aria and Didi's Code:"""
 
@@ -473,7 +475,7 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
   return image_urls
 
 #the second input is the number of images to fetch
-products = fetch_image_urls('paintings for sale', 10, wd, 1)
+products = fetch_image_urls('paintings for sale', NUM_OF_IMAGES, wd, 1)
 
 for product in products:
   print("Product page: " + product.link + ", Image url: " + product.image_link)
