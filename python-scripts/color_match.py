@@ -578,11 +578,11 @@ def process():
   image = id + "." + ext
   image_path = UPLOAD_DIR + image
 
-  # url = image_path
-  # myfile = requests.get(url)
-  # open(image, 'wb').write(myfile.content)
+  url = image_path
+  img_request = requests.get(url)
+  open(image, 'wb').write(img_request.content)
 
-  color_thief = ColorThief(image_path) #used a picture of flower
+  color_thief = ColorThief(image) #used a picture of flower
 
   # Get a complete color palette for that image
   palette = color_thief.get_palette(color_count=6)
