@@ -20,11 +20,31 @@ NUM_OF_IMAGES = 127
 # regular expression for validating image url
 IMAGE_URL_PATTERN = r'^(?:(http(?:s?)):\/\/)?((?:\w+\.)+\w+)\/(?:.+\/)*.+\.(jpe?g|png)\??.*$'
 
-"""# Aria and Didi's Code:"""
-
 import io
+import re
+import math
+import time
+import requests
+import flask
+import os
+import logging
 import pandas as pd #data frame
 import numpy as np #handle numebrs
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import SGDClassifier
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import f1_score
+from sklearn.metrics import roc_auc_score
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from colorthief import ColorThief
+from urllib.request import urlopen
+from selenium import webdriver
+from flask import request, jsonify
+from flask_cors import CORS
+# from google.colab.output import eval_js
+
+"""# Aria and Didi's Code:"""
 
 #to make this notebook's output stable across runs garantees this shuffle will be same as next
 np.random.seed(42)
@@ -156,7 +176,6 @@ data_2 = data_2.drop(["Color1", "Color2"], axis=1)
 data_2.head()
 
 #Create a test set of data to work with.
-from sklearn.model_selection import train_test_split
 train_set, test_set = train_test_split(data_2, test_size=0.2, random_state=42)
 
 #create labels and features for both the training and testing sets
@@ -170,12 +189,6 @@ y_test = test_set["Match"]
 
 #SGDClassifier (Stochastic Gradient Descent):
 
-#Import the SGDClassifier
-from sklearn.linear_model import SGDClassifier
-
-#Import the cross_val_score
-from sklearn.model_selection import cross_val_predict
-
 #Define the classifier with max_iter = 5, tol = -np.infty, random_state = 42
 sgd_clf = SGDClassifier(max_iter = 5, tol = -np.infty, random_state = 42)
 
@@ -185,20 +198,11 @@ sgd_clf.fit(x_train, y_train)
 #hold the sgd predictions
 sgd_train_pred = cross_val_predict(sgd_clf, x_train, y_train, cv = 8)
 
-#SGD F1 Score
-from sklearn.metrics import f1_score
-
 f1_score(y_train, sgd_train_pred)
-
-#SGD ROC AUC
-from sklearn.metrics import roc_auc_score
 
 roc_auc_score(y_train, sgd_train_pred)
 
 """## SVC Classifier"""
-
-#SVCClassifier (Support Vector Classification)
-from sklearn.svm import SVC
 
 svm_clf = SVC(gamma="auto")
 svm_clf.fit(x_train, y_train)
@@ -213,9 +217,6 @@ roc_auc_score(y_train, svm_train_pred)
 """## Random Forest Classifier"""
 
 #Random Forest:
-
-#Import the RandomForestClassifier:
-from sklearn.ensemble import RandomForestClassifier
 
 #Define the classifier with n_estimators = 100 and random_state = 42 and
 forest_clf = RandomForestClassifier(n_estimators = 100, random_state = 42)
@@ -353,12 +354,6 @@ def colors_to_hex(colors):
 # !apt install chromium-chromedriver
 # !pip install selenium
 # !pip install colorthief
-import math
-from colorthief import ColorThief
-import time
-import requests
-# set options to be headless, ..
-from selenium import webdriver
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
@@ -366,10 +361,6 @@ options.add_argument('--disable-dev-shm-usage')
 
 if CHROME: 
   options.binary_location = CHROME
-
-import io
-import re
-from urllib.request import urlopen
 
 class Product:
 
