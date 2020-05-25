@@ -477,9 +477,9 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
 #the second input is the number of images to fetch
 products = fetch_image_urls('paintings for sale', NUM_OF_IMAGES, wd, 1)
 
-for product in products:
-  print("Product page: " + product.link + ", Image url: " + product.image_link)
-  print()
+# for product in products:
+#   print("Product page: " + product.link + ", Image url: " + product.image_link)
+#   print()
 for product in products:
   product.set_color_palette()
 
