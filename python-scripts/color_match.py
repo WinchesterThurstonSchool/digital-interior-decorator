@@ -13,6 +13,8 @@ ROOT = "/"
 UPLOAD_DIR = ROOT + "uploaded/"
 # chrome browser binary (leave bank for default)
 CHROME = ""
+# chromedriver binary (default: "chromedriver")
+CHROMEDRIVER = "chromedriver"
 
 """# Aria and Didi's Code:"""
 
@@ -384,7 +386,7 @@ class Product:
       self.color_palette = color_thief.get_palette(color_count=6)
 
 #webdriver mimics a human interacting with the website, it can click things, scroll and extract data
-wd = webdriver.Chrome('chromedriver',options=options)
+wd = webdriver.Chrome(CHROMEDRIVER,options=options)
 
 #Source: https://towardsdatascience.com/image-scraping-with-python-a96feda8af2d
 #returns a set of products (a product is made up of two links an image source and link to that products page)
