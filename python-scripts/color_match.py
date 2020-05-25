@@ -450,8 +450,6 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
         image_link = actual_images[index].get_attribute('src')
         image_urls.add(Product(product_link, image_link))
 
-      # save the link and the image 
-      image_urls.add(Product(product_link,image_link))
 
       image_count = len(image_urls)
 
