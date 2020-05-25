@@ -602,7 +602,7 @@ def process():
       }
   }
 
-  # os.remove(image) 
+  os.remove(image) 
 
   return jsonify(result)
 
