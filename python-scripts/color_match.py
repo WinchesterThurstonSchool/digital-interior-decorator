@@ -11,6 +11,8 @@ Original file is located at
 ROOT = "/"
 # directory in which the uploaded images are stored. default: ROOT + "uploaded/"
 UPLOAD_DIR = ROOT + "uploaded/"
+# chrome browser binary (leave bank for default)
+CHROME = ""
 
 """# Aria and Didi's Code:"""
 
@@ -355,6 +357,9 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
+
+if CHROME: 
+  options.binary_location = CHROME
 
 import io
 from urllib.request import urlopen
