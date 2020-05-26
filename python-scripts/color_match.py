@@ -30,7 +30,7 @@ CHROMEDRIVER = "chromedriver"
 # number of images to fetch from Google search result
 NUM_OF_IMAGES = 127
 # regular expression for validating image url
-IMAGE_URL_PATTERN = r'^(?:(http(?:s?)):\/\/)?((?:\w+\.)+\w+)\/(?:.+\/)*.+\.(jpe?g|png)\??.*$'
+IMAGE_URL_PATTERN = r'^(?:(http(?:s?)):\/\/)?((?:[a-z0-9-]+\.)+[a-z]+)\/(?:.+\/)*.+\.(jpe?g|png)\??.*$'
 
 import io
 import re
