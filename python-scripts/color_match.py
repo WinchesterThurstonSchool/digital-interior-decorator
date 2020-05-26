@@ -42,6 +42,7 @@ import os
 import logging
 import pandas as pd #data frame
 import numpy as np #handle numebrs
+import urllib.parse as urlparse
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import cross_val_predict
@@ -54,6 +55,7 @@ from urllib.request import urlopen
 from selenium import webdriver
 from flask import request, jsonify
 from flask_cors import CORS
+from urllib.parse import parse_qs
 # from google.colab.output import eval_js
 
 """# Aria and Didi's Code:"""
@@ -432,6 +434,11 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
         if link and 'http' in link and re.match(IMAGE_URL_PATTERN, link, re.I):
           image_link = link
           product_link = page_link.get_attribute('href')
+          
+          url_param = (parse_qs(urlparse.urlparse(product_link).query)['url'])[0]
+          if url_param: 
+            product_link = urlparse.unquote(url_param)
+
       #makes sure the image url matches the product url
       if not (product_link and image_link):
         continue
