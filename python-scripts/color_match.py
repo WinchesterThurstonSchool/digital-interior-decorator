@@ -435,8 +435,11 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
           image_link = link
           product_link = page_link.get_attribute('href')
 
-          url_param = (parse_qs(urlparse.urlparse(product_link).query)['url'])[0]
-          if url_param:
+          try:
+            url_param = (parse_qs(urlparse.urlparse(product_link).query)['url'])[0]
+          except:
+            pass
+          else:
             product_link = urlparse.unquote(url_param)
 
       #makes sure the image url matches the product url
