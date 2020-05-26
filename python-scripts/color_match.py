@@ -384,9 +384,8 @@ class Product:
 #webdriver mimics a human interacting with the website, it can click things, scroll and extract data
 wd = webdriver.Chrome(CHROMEDRIVER,options=options)
 
-#Source: https://towardsdatascience.com/image-scraping-with-python-a96feda8af2d
-#returns a set of products (a product is made up of two links an image source and link to that products page)
-#parameter are the string (in this case its "paintings for sale"), the number of products, webdriver, and an int that tells the webdriver how long to wait inbetween clicks
+# Google Images scraping algorithm
+# Inspired by: https://towardsdatascience.com/image-scraping-with-python-a96feda8af2d
 def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_between_interactions:int=1):
   def scroll_to_end(wd):
       wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -398,7 +397,7 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
   # load the page
   wd.get(search_url.format(q=query))
 
-  image_urls = set()
+  image_urls = dict()
   image_count = 0
   results_start = 0
   while image_count < max_links_to_fetch:
@@ -420,32 +419,24 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
         
       product_link = ""
       image_link = ""
-      index = -1
-
-      # extract product page url of the next image
-      actual_products = wd.find_elements_by_css_selector('a.Beeb4e')
-      for actual_product in actual_products:
-        if actual_product.get_attribute('href') and 'http' in actual_product.get_attribute('href'):
-          product_link = actual_product.get_attribute('href')
-                
-      # extracts the next image url 
-      actual_images = wd.find_elements_by_css_selector('img.n3VNCb')
-
-      i = 0
-      for actual_image in actual_images:
-        if actual_image.get_attribute('src') and 'http' in actual_image.get_attribute('src'):
-          image_link = actual_image.get_attribute('src')
-          index = i
-        i = i+1
       
-      #makes sure the image url matches the product url
-      if index != -1:
-        product_link = actual_products[index].get_attribute('href')
-        image_link = actual_images[index].get_attribute('src')
+      page_links = wd.find_elements_by_css_selector('a.eHAdSb')
 
-        # add image to array only when its url matches the standard pattern defined
-        if re.match(IMAGE_URL_PATTERN, image_link, re.I): 
-          image_urls.add(Product(product_link, image_link))
+      for page_link in page_links: 
+        if page_link in image_urls: 
+          continue
+
+        image = page_link.find_element_by_css_selector('img.n3VNCb')
+        link = image.get_attribute('src')
+
+        if link and 'http' in link and re.match(IMAGE_URL_PATTERN, link, re.I):
+          image_link = link
+          product_link = page_link.get_attribute('href')
+      #makes sure the image url matches the product url
+      if not (product_link and image_link):
+        continue
+
+      image_urls[product_link] = image_link
 
       image_count = len(image_urls)
 
@@ -469,13 +460,15 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
   return image_urls
 
 #the second input is the number of images to fetch
-products = fetch_image_urls('paintings for sale', NUM_OF_IMAGES, wd, 1)
+image_urls = fetch_image_urls('paintings for sale', NUM_OF_IMAGES, wd, 1)
 
-# for product in products:
-#   print("Product page: " + product.link + ", Image url: " + product.image_link)
-#   print()
-for product in products:
+products = set()
+for link in image_urls:
+  product = Product(link, image_urls[link])
   product.set_color_palette()
+  
+  print("Product page: " + product.link + ", Image url: " + product.image_link)
+  print()
 
 #converts hex to rgb
 def hex_converter(hex_color):
