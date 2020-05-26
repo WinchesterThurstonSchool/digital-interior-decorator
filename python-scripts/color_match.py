@@ -476,6 +476,7 @@ products = set()
 for link in image_urls:
   product = Product(link, image_urls[link])
   product.set_color_palette()
+  products.add(product)
 
   print("Product page: " + product.link + ", Image url: " + product.image_link)
   print()
