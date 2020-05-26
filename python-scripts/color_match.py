@@ -19,7 +19,7 @@ Original file is located at
 # %pip install -U flask-cors
 
 # constants
-# root address of the server. 
+# root address of the server.
 ROOT = "/"
 # directory in which the uploaded images are stored. default: ROOT + "uploaded/"
 UPLOAD_DIR = ROOT + "uploaded/"
@@ -107,7 +107,7 @@ def rgb(column):
 
   return {
       "red" : red,
-      "green" : green, 
+      "green" : green,
       "blue" : blue
   }
 
@@ -186,7 +186,7 @@ data_2.head()
 """## Training Model"""
 
 #Drop what we won't use in our ML model
-data_2 = data_2.drop(["Color1", "Color2"], axis=1) 
+data_2 = data_2.drop(["Color1", "Color2"], axis=1)
 data_2.head()
 
 #Create a test set of data to work with.
@@ -238,7 +238,7 @@ forest_clf = RandomForestClassifier(n_estimators = 100, random_state = 42)
 #Fit the classifier to X_train and y_train
 forest_clf.fit(x_train, y_train)
 
-#Get scores for the random forest classifier, cv = 10 and scoring 
+#Get scores for the random forest classifier, cv = 10 and scoring
 forest_train_pred = cross_val_predict(forest_clf, x_train, y_train, cv=8)
 
 #Forest F1 Score
@@ -314,7 +314,7 @@ def make_colors(n):
 
 #make data frame
 def make_data_frame(colors, palette):
-  #get the features for all combinations of the random colors and pallet in a data frame 
+  #get the features for all combinations of the random colors and pallet in a data frame
   vals = []
   for i in range(len(palette)):
     for j in range(len(colors)):
@@ -361,7 +361,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
-if CHROME: 
+if CHROME:
   options.binary_location = CHROME
 
 class Product:
@@ -391,8 +391,8 @@ wd = webdriver.Chrome(CHROMEDRIVER,options=options)
 def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_between_interactions:int=1):
   def scroll_to_end(wd):
       wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-      time.sleep(sleep_between_interactions)    
-  
+      time.sleep(sleep_between_interactions)
+
   # build the google query
   search_url = "https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&q={q}&oq={q}&gs_l=img"
 
@@ -408,9 +408,9 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
     # get all image thumbnail results
     thumbnail_results = wd.find_elements_by_css_selector("img.Q4LuWd")
     number_results = len(thumbnail_results)
-    
+
     print(f"Found: {number_results} search results. Extracting links from {results_start}:{number_results}")
-    
+
     for img in thumbnail_results[results_start:number_results]:
       # try to click every thumbnail such that we can get the real image behind it
       try:
@@ -418,14 +418,14 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
         time.sleep(sleep_between_interactions)
       except Exception:
         continue
-        
+
       product_link = ""
       image_link = ""
-      
+
       page_links = wd.find_elements_by_css_selector('a.eHAdSb')
 
-      for page_link in page_links: 
-        if page_link in image_urls: 
+      for page_link in page_links:
+        if page_link in image_urls:
           continue
 
         image = page_link.find_element_by_css_selector('img.n3VNCb')
@@ -434,9 +434,9 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
         if link and 'http' in link and re.match(IMAGE_URL_PATTERN, link, re.I):
           image_link = link
           product_link = page_link.get_attribute('href')
-          
+
           url_param = (parse_qs(urlparse.urlparse(product_link).query)['url'])[0]
-          if url_param: 
+          if url_param:
             product_link = urlparse.unquote(url_param)
 
       #makes sure the image url matches the product url
@@ -447,8 +447,8 @@ def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_betw
 
       image_count = len(image_urls)
 
-      if image_count % 50 == 0: 
-        print("Retrieved " + str(image_count) + " images") 
+      if image_count % 50 == 0:
+        print("Retrieved " + str(image_count) + " images")
 
       if len(image_urls) >= max_links_to_fetch:
         print(f"Found: {len(image_urls)} image links, done!")
@@ -473,7 +473,7 @@ products = set()
 for link in image_urls:
   product = Product(link, image_urls[link])
   product.set_color_palette()
-  
+
   print("Product page: " + product.link + ", Image url: " + product.image_link)
   print()
 
@@ -526,38 +526,38 @@ def color_distance(rgb1, rgb2):
   db = rgb1[2]-rgb2[2]
   return math.sqrt((2+r/256)*dr*dr + 4*dg*dg + (2+(255-r)/256)*db*db)
 
-"""# Jerry and Joe's Code: 
+"""# Jerry and Joe's Code:
 *Modified from above*
 """
 
 # message to be displayed when request is invalid
 INVALID_DATA = {
-    "success": False, 
+    "success": False,
     "error": {
-        "code": 400, 
+        "code": 400,
         "message": "Request is invalid! "
     }
 }
 
-app = flask.Flask(__name__) 
+app = flask.Flask(__name__)
 CORS(app)
 
-# a new "GET" API at the url "/api/" 
+# a new "GET" API at the url "/api/"
 @app.route('/api/process/', methods=['GET'])
 # method for this API
-def process(): 
+def process():
   # return the invalid message when there is no arguement
-  if len(request.args) == 0: 
-    return jsonify(INVALID_DATA) 
+  if len(request.args) == 0:
+    return jsonify(INVALID_DATA)
 
-  # return the invalid message when there is an unexpected arguement 
-  for arg in request.args: 
-    if not (arg == 'id' or arg == 'ext'): 
-      return jsonify(INVALID_DATA) 
+  # return the invalid message when there is an unexpected arguement
+  for arg in request.args:
+    if not (arg == 'id' or arg == 'ext'):
+      return jsonify(INVALID_DATA)
 
   # store the values of the arguements in variables
-  id = request.args['id'] 
-  ext = request.args['ext'] 
+  id = request.args['id']
+  ext = request.args['ext']
 
   image = id + "." + ext
   image_path = UPLOAD_DIR + image
@@ -579,14 +579,14 @@ def process():
   match = find_match(colors_to_hex(matches(predictions, colors)), products)
 
   result = {
-      "success": True, 
+      "success": True,
       "data": {
-          "link": match.link, 
+          "link": match.link,
           "image": match.image_link
       }
   }
 
-  os.remove(image) 
+  os.remove(image)
 
   return jsonify(result)
 
